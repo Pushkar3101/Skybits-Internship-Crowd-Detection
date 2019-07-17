@@ -6,20 +6,20 @@
 This  is a tutorial for how to use TensorFlow's Object Detection API to train a Person detection classifier for detecting small crowd in office spaces and departmental stores on Windows 10. I have used anaconda environment(version 4.6.14 ) with tensorflow version 1.13.1.
 
 #### Steps Required :
-1.Tensorflow GPU Installation
-2.Set up TensorFlow Directory and Anaconda Virtual Environment
-3.Labelling Pictures
-4.Generate Training data
-5.Creating label map and configuring training
-6.Training the data
-7.Exporting the Inference Graph
-8.Testing
-	      *** common errors and their solution
+1.Tensorflow GPU Installation  
+2.Set up TensorFlow Directory and Anaconda Virtual Environment  
+3.Labelling Pictures  
+4.Generate Training data  
+5.Creating label map and configuring training  
+6.Training the data  
+7.Exporting the Inference Graph  
+8.Testing  
+	      *** common errors and their solution  
 
 ## 1. Tensorflow GPU Installation
 ### Conventional Approach -
-- First find if the GPU is compatible with Tensorflow GPU or not! (From Here)
-- Download and Install Cuda Toolkit from here.
+- First find if the GPU is compatible with Tensorflow GPU or not! 
+- Download and Install Cuda Toolkit 
 - Download cuDNN by signing up on Nvidia Developer Website
 - Install cuDNN by extracting the contents of cuDNN into the Toolkit path installed in Step 2. There will be files that you have to replace in CUDA Toolkit Directory.
 - Is that it? No, then you need to check your path variables if CUDA_HOME is present or not. If not, please add it manually.
@@ -30,20 +30,18 @@ This  is a tutorial for how to use TensorFlow's Object Detection API to train a 
 - Test your installation.
 
  ### Better Approach - (I have used this)
-		       Install Anaconda and run the below commands :
-               ```
+ 
+Install Anaconda and run the below commands :
+               
 	       conda create --name tf_gpu
                activate tf_gpu
                conda install tensorflow-gpu
-               ```
+              
 
 This command will create an environment first named with ‘tf_gpu’ and    will install all the packages required by tensorflow-gpu including the cuda and cuDNN compatible versions.
 
  Visit TensorFlow's website for further installation details, including how to install it on other operating systems (like Linux). The object detection repository itself also has installation instructions.
 
-
-** steps 2-7 are used for training purposes(making a model from scratch).
-** Otherwise, download the tensorflow1 folder in C and  directly goto step 8 for testing purpose .
 ## 2. Set up TensorFlow Directory and Anaconda Virtual Environment
 The TensorFlow Object Detection API requires using the specific directory structure provided in its GitHub repository. It also requires several additional Python packages, specific additions to the PATH and PYTHONPATH variables, and a few extra setup commands to get everything set up to run or train an object detection model.
 This portion of the tutorial goes over the full set up required. It is fairly meticulous, but follow the instructions closely, because improper setup can cause unwieldy errors down the road.
@@ -114,10 +112,15 @@ Finally, run the following commands from the C:\tensorflow1\models\research dire
 ```
 
 ## 3. Labelling Pictures
-You can use your phone to take pictures of the objects or download images of the objects from Google Image Search.Make sure the images aren’t too large. They should be less than 200KB each, and their resolution shouldn’t be more than 720x1280. The larger the images are, the longer it will take to train the classifier. You can use the resizer.py script in this repository to reduce the size of the images.After you have all the pictures you need, move 20% of them to the \object_detection\images\test directory, and 80% of them to the \object_detection\images\train directory. Make sure there are a variety of pictures in both the \test and \train directories.
- LabelImg is a great tool for labeling images, and its GitHub page has very clear instructions on how to install and use it.
-LabelImg GitHub link
-LabelImg download link
+You can use your phone to take pictures of the objects or download images of the objects from Google Image Search.Make sure the images aren’t too large. They should be less than 200KB each, and their resolution shouldn’t be more than 720x1280. The larger the images are, the longer it will take to train the classifier. You can use the resizer.py script in this repository to reduce the size of the images.After you have all the pictures you need, move 20% of them to the \object_detection\images\test directory, and 80% of them to the \object_detection\images\train directory. Make sure there are a variety of pictures in both the \test and \train directories.  
+
+ LabelImg is a great tool for labeling images, and its GitHub page has very clear instructions on how to install and use it.  
+ 
+[LabelImg GitHub link](https://github.com/tzutalin/labelImg)  
+
+[LabelImg download link](https://www.dropbox.com/s/tq7zfrcwl44vxan/windows_v1.6.0.zip?dl=1)  
+
+
 Download and install LabelImg, point it to your \images\train directory, and then draw a box around each object in each image. Repeat the process for all the images in the \images\test directory. This will take a while!
 
 LabelImg saves a .xml file containing the label data for each image. These .xml files will be used to generate TFRecords, which are one of the inputs to the TensorFlow trainer. Once you have labeled and saved each image, there will be one .xml file for each image in the \test and \train directories.
@@ -230,6 +233,9 @@ To run any of the scripts, type running command  in the Anaconda Command Prompt 
 If everything is working properly, the object detector will initialize for about 10 -15  seconds and then display a window showing any objects it’s detected in the image!
  
  
+<p align="center">
+  <img src="doc/Screenshot (91).png">
+</p>
 
 
  
