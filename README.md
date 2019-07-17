@@ -234,10 +234,11 @@ If everything is working properly, the object detector will initialize for about
  
  
 <p align="center">
-  <img src="doc/Screenshot (91).png">
+  <img src="documents/Screenshot (91).png">
 </p>
 
-
- 
+  
+  
+Reference - https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10
  
 
