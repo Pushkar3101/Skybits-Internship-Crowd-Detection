@@ -31,11 +31,11 @@ This  is a tutorial for how to use TensorFlow's Object Detection API to train a 
 
  ### Better Approach - (I have used this)
 		       Install Anaconda and run the below commands :
-               ...
-			         conda create --name tf_gpu
+               ```
+	       conda create --name tf_gpu
                activate tf_gpu
                conda install tensorflow-gpu
-               ...
+               ```
 
 This command will create an environment first named with ‘tf_gpu’ and    will install all the packages required by tensorflow-gpu including the cuda and cuDNN compatible versions.
 
@@ -47,7 +47,9 @@ This command will create an environment first named with ‘tf_gpu’ and    wil
 ## 2. Set up TensorFlow Directory and Anaconda Virtual Environment
 The TensorFlow Object Detection API requires using the specific directory structure provided in its GitHub repository. It also requires several additional Python packages, specific additions to the PATH and PYTHONPATH variables, and a few extra setup commands to get everything set up to run or train an object detection model.
 This portion of the tutorial goes over the full set up required. It is fairly meticulous, but follow the instructions closely, because improper setup can cause unwieldy errors down the road.
-    ### 2a. Download TensorFlow Object Detection API repository from GitHub
+
+### 2a. Download TensorFlow Object Detection API repository from GitHub
+
 Create a folder directly in C: and name it “tensorflow1”. This working directory will contain the full TensorFlow object detection framework, as well as your training images, training data, trained classifier, configuration files, and everything else needed for the object detection classifier.
 Download the full TensorFlow object detection repository located at https://github.com/tensorflow/models by clicking the “Clone or Download” button and downloading the zip file. Open the downloaded zip file and extract the “models-master” folder directly into the C:\tensorflow1 directory you just created. Rename “models-master” to just “models”.
 Note: The TensorFlow models repository's code (which contains the object detection API) is continuously updated by the developers. Sometimes they make changes that break functionality with old versions of TensorFlow. It is always best to use the latest version of TensorFlow and download the latest models repository. 
@@ -64,10 +66,11 @@ To train your own object detector, delete the following files (do not delete the
 ### 2d. Set up new Anaconda virtual environment
 Next, we'll work on setting up a virtual environment in Anaconda for tensorflow-gpu. From the Start menu in Windows, search for the Anaconda Prompt utility and open it.
 In the command terminal that pops up, create a new virtual environment called “tensorflow1” by issuing the following command:
-...
+```
 C:\>conda activate tf_gpu
-...
+```
 Install the other necessary packages by issuing the following commands:
+```
 (tf_gpu) C:\> conda install -c anaconda protobuf
 (tf_gpu) C:\> pip install pillow
 (tf_gpu) C:\> pip install lxml
@@ -77,33 +80,38 @@ Install the other necessary packages by issuing the following commands:
 (tf_gpu) C:\> pip install matplotlib
 (tf_gpu) C:\> pip install pandas
 (tf_gpu) C:\> pip install opencv-python
+```
 
 ### 2e. Configure PYTHONPATH environment variable
 A PYTHONPATH variable must be created that points to the \models, \models\research, and \models\research\slim directories. Do this by issuing the following commands (from any directory):
-(tensorflow1) C:\> set PYTHONPATH=C:\tensorflow1\models;C:\tensorflow1\models\research;C:\tensorflow1\models\research\slim
- 
+```
+(tf_gpu) C:\> set PYTHONPATH=C:\tensorflow1\models;C:\tensorflow1\models\research;C:\tensorflow1\models\research\slim
+ ```
  
  
 (***: Every time the "tf_gpu" virtual environment is exited, the PYTHONPATH variable is reset and needs to be set up again. You can use "echo %PYTHONPATH% to see if it has been set or not ***)
  
 ### 2f. Compile Protobufs and run setup.py
+
 Next, compile the Protobuf files, which are used by TensorFlow to configure model and training parameters. Unfortunately, the short protoc compilation command posted on TensorFlow’s Object Detection API installation page does not work on Windows. Every .proto file in the \object_detection\protos directory must be called out individually by the command.
 In the Anaconda Command Prompt, change directories to the \models\research directory:
-...
+```
 (tf_gpu) C:\> cd C:\tensorflow1\models\research
-...
+```
  
 Then copy and paste the following command into the command line and press Enter:
-...
+```
 protoc --python_out=. .\object_detection\protos\anchor_generator.proto .\object_detection\protos\argmax_matcher.proto .\object_detection\protos\bipartite_matcher.proto .\object_detection\protos\box_coder.proto .\object_detection\protos\box_predictor.proto .\object_detection\protos\eval.proto .\object_detection\protos\faster_rcnn.proto .\object_detection\protos\faster_rcnn_box_coder.proto .\object_detection\protos\grid_anchor_generator.proto .\object_detection\protos\hyperparams.proto .\object_detection\protos\image_resizer.proto .\object_detection\protos\input_reader.proto .\object_detection\protos\losses.proto .\object_detection\protos\matcher.proto .\object_detection\protos\mean_stddev_box_coder.proto .\object_detection\protos\model.proto .\object_detection\protos\optimizer.proto .\object_detection\protos\pipeline.proto .\object_detection\protos\post_processing.proto .\object_detection\protos\preprocessor.proto .\object_detection\protos\region_similarity_calculator.proto .\object_detection\protos\square_box_coder.proto .\object_detection\protos\ssd.proto .\object_detection\protos\ssd_anchor_generator.proto .\object_detection\protos\string_int_label_map.proto .\object_detection\protos\train.proto .\object_detection\protos\keypoint_box_coder.proto .\object_detection\protos\multiscale_anchor_generator.proto .\object_detection\protos\graph_rewriter.proto .\object_detection\protos\calibration.proto .\object_detection\protos\flexible_grid_anchor_generator.proto 
-...
+```
 This creates a name_pb2.py file from every name.proto file in the \object_detection\protos folder.
+
 *** TensorFlow occasionally adds new .proto files to the \protos folder. If you get an error saying ImportError: cannot import name 'something_something_pb2' , you may need to update the protoc command to include the new .proto files. ***
+
 Finally, run the following commands from the C:\tensorflow1\models\research directory:
-...
+```
 (tf_gpu) C:\tensorflow1\models\research> python setup.py build
 (tf_gpu) C:\tensorflow1\models\research> python setup.py install
-...
+```
 
 ## 3. Labelling Pictures
 You can use your phone to take pictures of the objects or download images of the objects from Google Image Search.Make sure the images aren’t too large. They should be less than 200KB each, and their resolution shouldn’t be more than 720x1280. The larger the images are, the longer it will take to train the classifier. You can use the resizer.py script in this repository to reduce the size of the images.After you have all the pictures you need, move 20% of them to the \object_detection\images\test directory, and 80% of them to the \object_detection\images\train directory. Make sure there are a variety of pictures in both the \test and \train directories.
@@ -116,38 +124,38 @@ LabelImg saves a .xml file containing the label data for each image. These .xml 
  
 ## 4. Training Data
 With the images labeled, it’s time to generate the TFRecords that serve as input data to the TensorFlow training model. First, the image .xml data will be used to create .csv files containing all the data for the train and test images. From the \object_detection folder, issue the following command in the Anaconda command prompt:
-...
+```
 (tf_gpu) C:\tensorflow1\models\research\object_detection> python xml_to_csv.py
-...
+```
 This creates a train_labels.csv and test_labels.csv file in the \object_detection\images folder.
 Next, open the generate_tfrecord.py file in a text editor. Replace the label map starting at line 31 with your own label map, where each object is assigned an ID number. 
 # TO-DO replace this with label map
-...
+```
 def class_text_to_int(row_label):
     if row_label == 'person':
         return 1
     else:
         None
- ...
+ ```
  
 Then, generate the TFRecord files by issuing these commands from the \object_detection folder:
-...
+```
 python generate_tfrecord.py --csv_input=images\train_labels.csv --image_dir=images\train --output_path=train.record
 python generate_tfrecord.py --csv_input=images\test_labels.csv --image_dir=images\test --output_path=test.record
-...
+```
 These generate a train.record and a test.record file in \object_detection. These will be used to train the new object detection classifier.
  
 ## 5. Create Label map and configure Training
 ### 5a. Label map
 The label map tells the trainer what each object is by defining a mapping of class names to class ID numbers. Use a text editor to create a new file and save it as labelmap.pbtxt in the C:\tensorflow1\models\research\object_detection\training folder. (Make sure the file type is .pbtxt, not .txt !) In the text editor, copy or type in the label map in the format below (the example below is the label map for my Person Detector):
-...
+```
 item {
   id: 1
   name: 'person'
 }
-...
+```
 The label map ID numbers should be the same as what is defined in the generate_tfrecord.py file.you can add different ID numbers for detecting multiple objects.
-...
+```
 item {
   id: 1
   name: 'person'
@@ -162,7 +170,7 @@ item {
   id: 3
   name: 'cat'
 }
-...
+```
  
  
 ### 5b. Configure training
@@ -189,9 +197,9 @@ Save the file after the changes have been made.
 move train.py from /object_detection/legacy into the /object_detection folder and then continue following the steps below.
  
  From the \object_detection directory, issue the following command to begin training:
-... 
+``` 
 python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/faster_rcnn_inception_v2_pets.config
-...
+```
 If everything has been set up correctly, TensorFlow will initialize the training.
  
  
@@ -201,9 +209,9 @@ Each step of training reports the loss. It will start high and get lower and low
 ## 7. Export Inference Graph
 Now that training is complete, the last step is to generate the frozen inference graph (.pb file). From the \object_detection folder, issue the following command, where “XXXX” in “model.ckpt-XXXX” should be replaced with the highest-numbered .ckpt file in the training folder:
 
-...
+```
 python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/faster_rcnn_inception_v2_pets.config --trained_checkpoint_prefix training/model.ckpt-XXXX --output_directory inference_graph
-...
+```
 
 This creates a frozen_inference_graph.pb file in the \object_detection\inference_graph folder. The .pb file contains the object detection classifier.
 
