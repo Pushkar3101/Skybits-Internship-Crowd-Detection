@@ -1,0 +1,26 @@
+<annotation>
+	<folder>saree</folder>
+	<filename>SAI-PALLAVI-620x413.jpg</filename>
+	<path>C:/Users/pushkar/Desktop/saree/SAI-PALLAVI-620x413.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>620</width>
+		<height>413</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>person</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>219</xmin>
+			<ymin>13</ymin>
+			<xmax>371</xmax>
+			<ymax>407</ymax>
+		</bndbox>
+	</object>
+</annotation>

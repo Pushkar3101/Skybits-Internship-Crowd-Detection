@@ -1,0 +1,26 @@
+<annotation>
+	<folder>saree</folder>
+	<filename>630-01130349en_Masterfile.jpg</filename>
+	<path>C:/Users/pushkar/Desktop/saree/630-01130349en_Masterfile.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>300</width>
+		<height>450</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>person</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>119</xmin>
+			<ymin>118</ymin>
+			<xmax>225</xmax>
+			<ymax>407</ymax>
+		</bndbox>
+	</object>
+</annotation>

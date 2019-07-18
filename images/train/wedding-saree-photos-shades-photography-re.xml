@@ -1,0 +1,26 @@
+<annotation>
+	<folder>saree</folder>
+	<filename>wedding-saree-photos-shades-photography-re.jpg</filename>
+	<path>C:/Users/pushkar/Desktop/saree/wedding-saree-photos-shades-photography-re.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>822</width>
+		<height>527</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>person</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>462</xmin>
+			<ymin>35</ymin>
+			<xmax>656</xmax>
+			<ymax>524</ymax>
+		</bndbox>
+	</object>
+</annotation>
